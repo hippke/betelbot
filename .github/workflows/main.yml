@@ -2,9 +2,9 @@ name: Tweet
 
 #on: [push]
 
-#on:
-#  schedule:
-#    - cron: '00 17 * * *'
+on:
+  schedule:
+    - cron: '00 17 * * *'
 
 jobs:
   build:
