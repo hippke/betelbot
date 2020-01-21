@@ -1,4 +1,4 @@
-![Logo](https://raw.githubusercontent.com/hippke/betelbot/master/banner.png)
+![Logo](https://raw.githubusercontent.com/hippke/betelbot/master/banner.jpg)
 
 # Betelbot: Betelgeuse Supernova Twitter Bot
 
