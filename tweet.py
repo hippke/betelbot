@@ -3,7 +3,6 @@ from bs4 import BeautifulSoup
 from matplotlib import pyplot as plt
 from wotan import flatten
 from twython import Twython
-from auth import consumer_key, consumer_secret, access_token, access_token_secret
 import requests
 
 
@@ -47,23 +46,19 @@ def build_string(days_ago, mag):
         + np.std(mag[data_last1_6_days]) / np.sqrt(n_obs_last1_6_days)
     diff = mean_last24hrs - mean_last1_6_days
     sigma = diff / stdev
-
     if n_obs_last24hrs < 3 or n_obs_last1_6_days < 3:
         print('Not enough observations. Abort.')
         return None
     else:
-
         if diff > 0:
             changeword = 'dimmer'
         else:
             changeword = 'brighter'
-
         mag_text = "My visual mag from last night was " + \
             str(format(mean_last24hrs, '.2f')) + \
             ' (avg of ' + \
             str(n_obs_last24hrs) + \
             ' observations). '
-
         change_text = 'That is ' + \
             format(abs(diff), '.2f') + \
             ' mag ' + \
@@ -73,36 +68,40 @@ def build_string(days_ago, mag):
             ', ' + \
             format(abs(sigma), '.1f') + \
             'σ). #Betelgeuse'
-
         text = mag_text + change_text
         print(text)
         return text
 
 
+def get_mags_from_AAVSO(url):
+    r = requests.get(url)
+    soup = BeautifulSoup(r.content, 'html.parser')
+    rows = soup.select('tbody tr')
+    dates = []
+    mags = []
+    for row in rows:
+        string = '' + row.text
+        string = string.split('\n')
+        try:
+            date = float(string[3])
+            mag = float(string[5])
+            dates.append(date)
+            mags.append(mag)
+        except:
+            pass
+    return np.array(dates), np.array(mags)
+    
+
+consumer_key = os.environ.get('consumer_key')
+consumer_secret = os.environ.get('consumer_secret')
+access_token = os.environ.get('access_token')
+access_token_secret = os.environ.get('access_token_secret')
 plot_file = 'plot.png'
 url = 'https://www.aavso.org/apps/webobs/results/?star=betelgeuse&num_results=200&obs_types=vis'
 
-r = requests.get(url)
-soup = BeautifulSoup(r.content, 'html.parser')
-rows = soup.select('tbody tr')
-dates = []
-mags = []
-for row in rows:
-    string = '' + row.text
-    string = string.split('\n')
-    try:
-        date = float(string[3])
-        mag = float(string[5])
-        dates.append(date)
-        mags.append(mag)
-    except:
-        pass
-dates = np.array(dates)
-mags = np.array(mags)
-
-#dates, mags = np.loadtxt(filename, unpack=True)
+dates, mags = get_mags_from_AAVSO(url)
 days_ago = np.max(dates) - dates
 text = build_string(days_ago, mags)
 if text is not None:
     make_plot(days_ago, dates, mags)
-    tweet(text, plot_file)
+    #tweet(text, plot_file)
