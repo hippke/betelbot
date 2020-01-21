@@ -4,8 +4,6 @@ Tracks [AAVSO observations](https://www.aavso.org/lcg/plot?auid=000-BBK-383&star
 
 > My visual mag from last night was 1.51 (avg of 15 observations). That is 0.03 mag dimmer than the avg of the 5 previous nights (n=100, 0.7σ). 
 
-![Logo](https://raw.githubusercontent.com/hippke/betelbot/master/plot.png | width=250)
-
-<img src="https://raw.githubusercontent.com/hippke/betelbot/master/plot.png" data-canonical-src="https://raw.githubusercontent.com/hippke/betelbot/master/plot.png" width="250" />
+<img src="https://raw.githubusercontent.com/hippke/betelbot/master/plot.png" data-canonical-src="https://raw.githubusercontent.com/hippke/betelbot/master/plot.png" width="400"/>
 
 This bot runs daily at 17:00 UTC as a [Github Action](https://github.com/hippke/betelbot/actions). You are free to adapt the idea and code provided here to make your own projects. Feedback is welcome.
