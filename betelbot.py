@@ -101,6 +101,7 @@ def get_mags_from_AAVSO(url):
     return np.array(dates), np.array(mags)
 
 
+
 dates, mags = get_mags_from_AAVSO(url)
 days_ago = np.max(dates) - dates
 text = build_string(days_ago, mags)
