@@ -1,6 +1,6 @@
 name: Tweet
 
-on: [push]
+#on: [push]
 
 #on:
 #  schedule:
