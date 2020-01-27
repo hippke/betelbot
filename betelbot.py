@@ -30,12 +30,14 @@ def make_plot(days_ago, dates, mag):
         days_ago,
         mag,
         method='lowess',
-        window_length=time_span/5,
+        window_length=time_span/3,
         return_trend=True,
         )
     plt.scatter(days_ago, mag, s=5, color='blue', alpha=0.5)
     plt.xlabel('Days before today')
     plt.ylabel('Visual magnitude')
+    mid = np.median(mag)
+    plt.ylim(mid-1, mid+1)
     plt.plot(days_ago, trend_lc, color='red', linewidth=1)
     plt.gca().invert_yaxis()
     plt.gca().invert_xaxis()
@@ -49,34 +51,39 @@ def build_string(days_ago, mag):
     data_last1_6_days = np.where((days_ago<6) & (days_ago>1))
     n_obs_last24hrs = np.size(mag[data_last24hrs])
     n_obs_last1_6_days = np.size(mag[data_last1_6_days])
-    mean_last24hrs = np.mean(mag[data_last24hrs])
-    mean_last1_6_days = np.mean(mag[data_last1_6_days])
+    mean_last24hrs = np.median(mag[data_last24hrs])
+    mean_last1_6_days = np.median(mag[data_last1_6_days])
     stdev = np.std(mag[data_last24hrs]) / np.sqrt(n_obs_last24hrs) \
         + np.std(mag[data_last1_6_days]) / np.sqrt(n_obs_last1_6_days)
     diff = mean_last24hrs - mean_last1_6_days
     sigma = diff / stdev
+
     if n_obs_last24hrs < 3 or n_obs_last1_6_days < 3:
         print('Not enough observations. Abort.')
         return None
     else:
+
         if diff > 0:
             changeword = 'dimmer'
         else:
             changeword = 'brighter'
+
         mag_text = "My visual mag from last night was " + \
             str(format(mean_last24hrs, '.2f')) + \
-            ' (avg of ' + \
+            ' (med of ' + \
             str(n_obs_last24hrs) + \
             ' observations). '
+
         change_text = 'That is ' + \
             format(abs(diff), '.2f') + \
             ' mag ' + \
             changeword + \
-            ' than the avg of the 5 previous nights (n=' + \
+            ' than the med of the 5 previous nights (n=' + \
             str(n_obs_last1_6_days) + \
             ', ' + \
             format(abs(sigma), '.1f') + \
             'σ). #Betelgeuse'
+
         text = mag_text + change_text
         print(text)
         return text
