@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 from matplotlib import pyplot as plt
 from wotan import flatten
 from twython import Twython
+import datetime
 
 
 consumer_key = os.environ.get('consumer_key')
@@ -51,7 +52,8 @@ def make_plot(days_ago, dates, mag):
     plt.xlim(0, x_days)
     plt.gca().invert_yaxis()
     plt.gca().invert_xaxis()
-    plt.text(x_days-2, max_plot-0.05, 'AAVSO visual (by-eye) daily bins')
+    date_text = datetime.datetime.now().strftime("%d %b %Y")
+    plt.text(x_days-2, max_plot-0.05, date_text + '   AAVSO visual (by-eye) daily bins')
     plt.savefig(plot_file, bbox_inches='tight', dpi=300)
     print('Plot made, test120')
 
@@ -134,4 +136,4 @@ days_ago = np.max(dates) - dates
 text = build_string(days_ago, mags)
 if text is not None:
     make_plot(days_ago, dates, mags)
-    tweet(text, plot_file)
+    #tweet(text, plot_file)
