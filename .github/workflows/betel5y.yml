@@ -4,7 +4,7 @@ name: betel5y
 
 on:
   schedule:
-    - cron: '30 19 * * *'
+    - cron: '00 18 * * *'
 
 jobs:
   build:
@@ -19,7 +19,7 @@ jobs:
     - name: Install dependencies
       run: |
         pip install twython numpy bs4 wotan matplotlib requests
-    - name: betelbot
+    - name: betel
       env:
         consumer_key: ${{ secrets.consumer_key }}
         consumer_secret: ${{ secrets.consumer_secret }}
