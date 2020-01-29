@@ -88,4 +88,4 @@ print(text)
 
 if text is not None:
     make_plot(days_ago, dates, mags)
-    #tweet(text, plot_file)
+    tweet(text, plot_file)
