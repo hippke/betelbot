@@ -39,6 +39,7 @@ def make_plot(days_ago, dates, mag):
     # Make daily bins
     min_plot = 0.0
     max_plot = 1.75
+    x_days = 150
 
     nights = np.arange(0, max(days_ago), 1)
     daily_mags = []
@@ -56,11 +57,11 @@ def make_plot(days_ago, dates, mag):
     plt.ylabel('Visual magnitude')
     mid = np.median(mag)
     plt.ylim(min_plot, max_plot)
-    plt.xlim(0, 200)
+    plt.xlim(0, x_days)
     #plt.plot(days_ago, trend_lc, color='red', linewidth=1)
     plt.gca().invert_yaxis()
     plt.gca().invert_xaxis()
-    plt.text(max(days_ago)-0.1, max_plot-0.05, 'AAVSO visual (by-eye) daily bins')
+    plt.text(x_days-1, max_plot-0.05, 'AAVSO visual (by-eye) daily bins')
     plt.savefig(plot_file, bbox_inches='tight', dpi=100)
     print('Plot made')
 
