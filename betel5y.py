@@ -17,7 +17,7 @@ def make_plot(days_ago, dates, mag):
     max_plot = 1.4
     x_days = 2000
     
-    # Make daily bins
+    # Make bins
     bin_width = 10
     nights = np.arange(0, max(days_ago), bin_width)
     bin_mags = []
@@ -33,17 +33,16 @@ def make_plot(days_ago, dates, mag):
         errors.append(error)
         print(night, flux, error, n_obs, np.std(mag[selector]))
 
+    # Convert magnitudes to fluxes
     bin_mags = np.array(bin_mags)
     flux = 1 / (10**(0.4 * (bin_mags - baseline_mag)))
     print(flux)
 
+    # Convert days to digital years
     date = datetime.datetime.now()
     digi_year = (float(date.strftime("%j"))-1) / 366 + float(date.strftime("%Y"))
     days = nights+bin_width/2
-    years = days / 365.2524
-    years_before = digi_year - years
-    #years_before = years_before[::-1]
-    print(years_before)
+    years_before = digi_year - (days / 365.2524)
 
     fig, ax = plt.subplots()
     plt.errorbar(years_before, flux, yerr=errors, fmt='.k')
@@ -58,8 +57,6 @@ def make_plot(days_ago, dates, mag):
     plt.text(2015.1, 0.03, 'AAVSO visual (by-eye) 10-day bins. Update: '+date_text)
     plt.savefig(plot_file, bbox_inches='tight', dpi=300)
     print('Plot made')
-    #last_percentage = 
-    #return flux[:-1]
 
 
 # Pull the last 10 pages from AAVSO and collate the dates and mags
