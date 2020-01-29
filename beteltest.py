@@ -22,10 +22,10 @@ def tweet(text, image):
     twitter.update_status(status=text, media_ids=[response['media_id']])
     print("Done.")
 
-
 def make_plot(days_ago, dates, mag):
     print('Making plot...')
     time_span = np.max(dates) - np.min(dates)
+    """
     flatten_lc, trend_lc = flatten(
         days_ago,
         mag,
@@ -33,15 +33,37 @@ def make_plot(days_ago, dates, mag):
         window_length=time_span/3,
         return_trend=True,
         )
-    plt.scatter(days_ago, mag, s=5, color='blue', alpha=0.5)
+    """
+    #plt.scatter(days_ago, mag, s=5, color='blue', alpha=0.3)
+
+    # Make daily bins
+    min_plot = 0.5
+    max_plot = 1.75
+
+    nights = np.arange(0, max(days_ago), 1)
+    daily_mags = []
+    errors = []
+    for night in nights:
+        selector = np.where((days_ago<night+1) & (days_ago>night))
+        n_obs = np.size(mag[selector])
+        flux = np.mean(mag[selector])
+        daily_mags.append(flux)
+        error = np.std(mag[selector]) / np.sqrt(n_obs)
+        errors.append(error)
+        print(night, flux, error, n_obs, np.std(mag[selector]))
+
+    plt.errorbar(nights+0.5, daily_mags, yerr=errors, fmt='.k')
+
     plt.xlabel('Days before today')
     plt.ylabel('Visual magnitude')
     mid = np.median(mag)
-    plt.ylim(mid-1, mid+1)
-    plt.plot(days_ago, trend_lc, color='red', linewidth=1)
+    plt.ylim(min_plot, max_plot)
+    plt.xlim(200, 0)
+    #plt.plot(days_ago, trend_lc, color='red', linewidth=1)
     plt.gca().invert_yaxis()
     plt.gca().invert_xaxis()
-    plt.savefig(plot_file, bbox_inches='tight', dpi=300)
+    plt.text(max(days_ago)-0.1, max_plot-0.05, 'AAVSO visual (by-eye) daily bins')
+    plt.savefig("test.png", bbox_inches='tight', dpi=100)
     print('Done.')
 
 
