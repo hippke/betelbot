@@ -1,13 +1,7 @@
-#import os
-#import requests
 import numpy as np
 import datetime
-#from bs4 import BeautifulSoup
 from matplotlib import pyplot as plt
-from wotan import flatten
 from betellib import tweet, build_string, get_mags_from_AAVSO
-#from datetime import datetime
-
 
 
 def make_plot(days_ago, dates, mag):
@@ -51,8 +45,6 @@ def make_plot(days_ago, dates, mag):
     mid = np.median(mag)
     plt.ylim(min_plot, max_plot)
     plt.xlim(2015, digi_year+0.25)
-    #plt.gca().invert_yaxis()
-    #plt.gca().invert_xaxis()
     date_text = datetime.datetime.now().strftime("%d %b %Y")
     plt.text(2015.1, 0.03, 'AAVSO visual (by-eye) 10-day bins. Update: '+date_text)
     plt.savefig(plot_file, bbox_inches='tight', dpi=300)
@@ -80,7 +72,7 @@ data_last24hrs = np.where(days_ago<1)
 mean_last24hrs = np.median(mags[data_last24hrs])
 flux = 1 / (10**(0.4 * (mean_last24hrs - baseline_mag)))
 percentage = str(int(round(flux * 100, 0)))
-text = "#Betelgeuse is now at " + percentage + r"% of its usual brightness!"
+text = "Now at " + percentage + r"% of my usual brightness! #Betelgeuse"
 print(text)
 
 if text is not None:
