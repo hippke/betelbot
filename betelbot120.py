@@ -53,7 +53,7 @@ def make_plot(days_ago, dates, mag):
     plt.gca().invert_yaxis()
     plt.gca().invert_xaxis()
     date_text = datetime.datetime.now().strftime("%d %b %Y")
-    plt.text(x_days-2, max_plot-0.05, 'AAVSO visual (by-eye) daily bins. Update:', date_text)
+    plt.text(x_days-2, max_plot-0.05, 'AAVSO visual (by-eye) daily bins. Update: '+date_text)
     plt.savefig(plot_file, bbox_inches='tight', dpi=300)
     print('Plot made, test120')
 
