@@ -51,9 +51,7 @@ def make_plot(days_ago, dates, mag):
         error = np.std(mag[selector]) / np.sqrt(n_obs)
         errors.append(error)
         print(night, flux, error, n_obs, np.std(mag[selector]))
-
     plt.errorbar(nights+0.5, daily_mags, yerr=errors, fmt='.k')
-
     plt.xlabel('Days before today')
     plt.ylabel('Visual magnitude')
     mid = np.median(mag)
@@ -64,7 +62,7 @@ def make_plot(days_ago, dates, mag):
     plt.gca().invert_xaxis()
     plt.text(max(days_ago)-0.1, max_plot-0.05, 'AAVSO visual (by-eye) daily bins')
     plt.savefig(plot_file, bbox_inches='tight', dpi=100)
-    print('Done.')
+    print('Plot made')
 
 
 def build_string(days_ago, mag):
