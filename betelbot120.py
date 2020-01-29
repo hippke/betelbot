@@ -91,7 +91,7 @@ def build_string(days_ago, mag):
         else:
             changeword = 'brighter'
 
-        mag_text = "My visual mag from last night was " + \
+        mag_text = "Daily long-term update! My visual mag from last night was " + \
             str(format(mean_last24hrs, '.2f')) + \
             ' (med of ' + \
             str(n_obs_last24hrs) + \
