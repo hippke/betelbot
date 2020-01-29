@@ -1,12 +1,8 @@
-#import os
-#import requests
 import numpy as np
 import datetime
-#from bs4 import BeautifulSoup
 from matplotlib import pyplot as plt
 from wotan import flatten
 from betellib import tweet, build_string, get_mags_from_AAVSO
-
 
 
 def make_plot(days_ago, dates, mag):
