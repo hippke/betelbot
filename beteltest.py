@@ -37,7 +37,7 @@ def make_plot(days_ago, dates, mag):
     #plt.scatter(days_ago, mag, s=5, color='blue', alpha=0.3)
 
     # Make daily bins
-    min_plot = 0.5
+    min_plot = 0.0
     max_plot = 1.75
 
     nights = np.arange(0, max(days_ago), 1)
@@ -58,12 +58,12 @@ def make_plot(days_ago, dates, mag):
     plt.ylabel('Visual magnitude')
     mid = np.median(mag)
     plt.ylim(min_plot, max_plot)
-    plt.xlim(200, 0)
+    plt.xlim(0, 200)
     #plt.plot(days_ago, trend_lc, color='red', linewidth=1)
     plt.gca().invert_yaxis()
     plt.gca().invert_xaxis()
     plt.text(max(days_ago)-0.1, max_plot-0.05, 'AAVSO visual (by-eye) daily bins')
-    plt.savefig("test.png", bbox_inches='tight', dpi=100)
+    plt.savefig(plot_file, bbox_inches='tight', dpi=100)
     print('Done.')
 
 
