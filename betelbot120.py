@@ -25,22 +25,11 @@ def tweet(text, image):
 def make_plot(days_ago, dates, mag):
     print('Making plot...')
     time_span = np.max(dates) - np.min(dates)
-    """
-    flatten_lc, trend_lc = flatten(
-        days_ago,
-        mag,
-        method='lowess',
-        window_length=time_span/3,
-        return_trend=True,
-        )
-    """
-    #plt.scatter(days_ago, mag, s=5, color='blue', alpha=0.3)
-
-    # Make daily bins
     min_plot = 0.0
     max_plot = 1.75
     x_days = 120
-
+    
+    # Make daily bins
     nights = np.arange(0, max(days_ago), 1)
     daily_mags = []
     errors = []
@@ -60,7 +49,6 @@ def make_plot(days_ago, dates, mag):
     mid = np.median(mag)
     plt.ylim(min_plot, max_plot)
     plt.xlim(0, x_days)
-    #plt.plot(days_ago, trend_lc, color='red', linewidth=1)
     plt.gca().invert_yaxis()
     plt.gca().invert_xaxis()
     plt.text(x_days-2, max_plot-0.05, 'AAVSO visual (by-eye) daily bins')
@@ -130,9 +118,7 @@ def get_mags_from_AAVSO(url):
             pass
     return np.array(dates), np.array(mags)
 
-
-
-
+# Pull the last 10 pages from AAVSO and collate the dates and mags
 pages = np.arange(1, 10, 1)
 all_dates = np.array([])
 all_mags = np.array([])
@@ -142,7 +128,6 @@ for page in pages:
     dates, mags = get_mags_from_AAVSO(url)
     all_dates = np.concatenate((all_dates, dates))
     all_mags = np.concatenate((all_mags, mags))
-
 dates = all_dates
 mags = all_mags
 days_ago = np.max(dates) - dates
