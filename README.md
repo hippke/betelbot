@@ -8,4 +8,6 @@ Tracks [AAVSO observations](https://www.aavso.org/lcg/plot?auid=000-BBK-383&star
 
 <img src="https://raw.githubusercontent.com/hippke/betelbot/master/plot.png" data-canonical-src="https://raw.githubusercontent.com/hippke/betelbot/master/plot.png" width="400"/>
 
+<img src="https://raw.githubusercontent.com/hippke/betelbot/master/plot_long.png" data-canonical-src="https://raw.githubusercontent.com/hippke/betelbot/master/plot_long.png" width="400"/>
+
 This bot runs daily at 17:00 UTC as a [Github Action](https://github.com/hippke/betelbot/actions). You are free to adapt the idea and code provided here to make your own projects. Feedback is welcome.
