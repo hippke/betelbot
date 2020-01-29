@@ -39,7 +39,7 @@ def make_plot(days_ago, dates, mag):
     # Make daily bins
     min_plot = 0.0
     max_plot = 1.75
-    x_days = 150
+    x_days = 120
 
     nights = np.arange(0, max(days_ago), 1)
     daily_mags = []
@@ -48,8 +48,10 @@ def make_plot(days_ago, dates, mag):
         selector = np.where((days_ago<night+1) & (days_ago>night))
         n_obs = np.size(mag[selector])
         flux = np.mean(mag[selector])
-        daily_mags.append(flux)
         error = np.std(mag[selector]) / np.sqrt(n_obs)
+        if error > 0.75:
+            error = 0
+        daily_mags.append(flux)
         errors.append(error)
         print(night, flux, error, n_obs, np.std(mag[selector]))
     plt.errorbar(nights+0.5, daily_mags, yerr=errors, fmt='.k')
@@ -61,7 +63,7 @@ def make_plot(days_ago, dates, mag):
     #plt.plot(days_ago, trend_lc, color='red', linewidth=1)
     plt.gca().invert_yaxis()
     plt.gca().invert_xaxis()
-    plt.text(x_days-1, max_plot-0.05, 'AAVSO visual (by-eye) daily bins')
+    plt.text(x_days-2, max_plot-0.05, 'AAVSO visual (by-eye) daily bins')
     plt.savefig(plot_file, bbox_inches='tight', dpi=100)
     print('Plot made')
 
