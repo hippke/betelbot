@@ -136,4 +136,4 @@ days_ago = np.max(dates) - dates
 text = build_string(days_ago, mags)
 if text is not None:
     make_plot(days_ago, dates, mags)
-    #tweet(text, plot_file)
+    tweet(text, plot_file)
