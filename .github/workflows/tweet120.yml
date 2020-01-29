@@ -1,6 +1,6 @@
 name: Tweet120
 
-#on: [push]
+on: [push]
 
 on:
   schedule:
