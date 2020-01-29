@@ -64,7 +64,7 @@ def make_plot(days_ago, dates, mag):
     plt.gca().invert_yaxis()
     plt.gca().invert_xaxis()
     plt.text(x_days-2, max_plot-0.05, 'AAVSO visual (by-eye) daily bins')
-    plt.savefig(plot_file, bbox_inches='tight', dpi=100)
+    plt.savefig(plot_file, bbox_inches='tight', dpi=300)
     print('Plot made, test120')
 
 
