@@ -2,9 +2,9 @@ name: betel5y
 
 #on: [push]
 
-on:
-  schedule:
-    - cron: '15 11 * * *'
+#on:
+#  schedule:
+#    - cron: '15 11 * * *'
 
 jobs:
   build:
