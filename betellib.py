@@ -10,8 +10,6 @@ consumer_secret = os.environ.get('consumer_secret')
 access_token = os.environ.get('access_token')
 access_token_secret = os.environ.get('access_token_secret')
 
-#url = 'https://www.aavso.org/apps/webobs/results/?star=betelgeuse&num_results=200&obs_types=vis'
-
 
 def tweet(text, image):
     print('Tweeting...')
@@ -19,7 +17,6 @@ def tweet(text, image):
     response = twitter.upload_media(media=open(image, 'rb'))
     twitter.update_status(status=text, media_ids=[response['media_id']])
     print("Done.")
-
 
 
 def build_string(days_ago, mag):
@@ -79,8 +76,10 @@ def get_mags_from_AAVSO(url):
         try:
             date = float(string[3])
             mag = float(string[5])
-            dates.append(date)
-            mags.append(mag)
+            # Remove crap
+            if mag < 3:
+                dates.append(date)
+                mags.append(mag)
         except:
             pass
     return np.array(dates), np.array(mags)
