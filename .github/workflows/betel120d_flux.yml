@@ -2,9 +2,9 @@ name: betel120dflux
 
 #on: [push]
 
-#on:
-#  schedule:
-#    - cron: '20 19 * * *'
+on:
+  schedule:
+    - cron: '00 19 * * *'
 
 jobs:
   build:
