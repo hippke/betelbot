@@ -107,14 +107,13 @@ make_plot(days_ago, dates, mags)
 frames = []
 files = glob.glob('*.png')
 for file in files:
+    print('Appending file', file)
     new_frame = PIL.Image.open(file, mode='r')
     frames.append(new_frame)
 
 # Make last frame last longer
 for i in range(5):
     frames.append(new_frame)
-
-print(frames)
     
 # Save gif
 frames[0].save(
