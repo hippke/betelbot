@@ -18,7 +18,7 @@ jobs:
         python-version: 3.7
     - name: Install dependencies
       run: |
-        pip install twython numpy bs4 wotan matplotlib requests transitleastsquares PIL scikit-learn
+        pip install twython numpy bs4 wotan matplotlib requests transitleastsquares scikit-learn
     - name: betel
       env:
         consumer_key: ${{ secrets.consumer_key }}
