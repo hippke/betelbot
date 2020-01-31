@@ -1,12 +1,17 @@
-import numpy as np
 import datetime
-from matplotlib import pyplot as plt
-from wotan import flatten
-from betellib import tweet, build_string, get_mags_from_AAVSO
 import os
 import glob
 import PIL
+import numpy as np
 from PIL import Image, ImageDraw
+from matplotlib import pyplot as plt
+
+from transitleastsquares import cleaned_array
+from betellib import build_string, get_mags_from_AAVSO
+
+from sklearn import gaussian_process
+from sklearn.gaussian_process import GaussianProcessRegressor
+from sklearn.gaussian_process.kernels import Matern, WhiteKernel, ConstantKernel
 
 
 def make_plot(days_ago, dates, mag):
