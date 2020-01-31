@@ -114,6 +114,8 @@ for file in files:
 for i in range(5):
     frames.append(new_frame)
 
+print(frames)
+    
 # Save gif
 frames[0].save(
     'betel_video.gif',
