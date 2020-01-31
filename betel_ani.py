@@ -114,6 +114,7 @@ for file in files:
 # Make last frame last longer
 for i in range(5):
     frames.append(new_frame)
+frames.sort()
     
 # Save gif
 frames[0].save(
