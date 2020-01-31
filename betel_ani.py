@@ -106,6 +106,7 @@ make_plot(days_ago, dates, mags)
 # Make animation
 frames = []
 files = glob.glob('*.png')
+files.sort()
 for file in files:
     print('Appending file', file)
     new_frame = PIL.Image.open(file, mode='r')
@@ -114,7 +115,6 @@ for file in files:
 # Make last frame last longer
 for i in range(5):
     frames.append(new_frame)
-frames.sort()
     
 # Save gif
 frames[0].save(
