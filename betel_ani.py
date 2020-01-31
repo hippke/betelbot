@@ -100,7 +100,8 @@ make_plot(days_ago, dates, mags)
 
 # Make animation
 frames = []
-for file in glob.glob('*.png'):
+files = glob.glob('*.png')
+for file in files:
     new_frame = PIL.Image.open(file, mode='r')
     frames.append(new_frame)
 
@@ -117,8 +118,7 @@ frames[0].save(
     duration=500,
     loop=0)  # forever
 
-for file in glob.glob('*.png')
+for file in files:
     os.remove(file)
-
 
 #tweet(text, plot_file)
