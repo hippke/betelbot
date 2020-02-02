@@ -3,6 +3,8 @@ import datetime
 from matplotlib import pyplot as plt
 from wotan import flatten
 from betellib import tweet, build_string, get_mags_from_AAVSO
+import requests
+from bs4 import BeautifulSoup
 
 
 def make_plot(days_ago, dates, mag):
@@ -16,18 +18,69 @@ def make_plot(days_ago, dates, mag):
         return_trend=True,
         )
     plt.scatter(days_ago, mag, s=5, color='blue', alpha=0.5)
+
+    plt.scatter(days_ago1, all_mags1, s=10, color='black', alpha=0.8, marker="x")
     plt.xlabel('Days before today')
     plt.ylabel('Visual magnitude')
     mid = np.median(mag)
     plt.ylim(mid-1, mid+1)
-    plt.xlim(0, 20)
+    plt.xlim(-1, 20)
     plt.plot(days_ago, trend_lc, color='red', linewidth=1)
     plt.gca().invert_yaxis()
     plt.gca().invert_xaxis()
     date_text = datetime.datetime.now().strftime("%d %b %Y")
-    plt.text(19.5, mid+1-0.05, 'AAVSO visual (by-eye) observations. Update: '+date_text)
+    data_last24hrs = np.where(days_ago<1)
+    mean_last24hrs = np.median(mag[data_last24hrs])
+    lumi = str(format(mean_last24hrs, '.2f'))
+    plt.text(19.5, mid+1-0.25, "AAVSO observations visual (by-eye) in blue", color='blue')
+    plt.text(19.5, mid+1-0.15, "AAVSO observations from CCDs in black", color='black')
+    plt.text(19.5, mid+1-0.05, "LOESS trend in red", color='red')
+    plt.text(19.5, mid-1+0.1, '#Betelgeuse brightness ' + lumi + " mag on " + date_text + " by @betelbot")
     plt.savefig(plot_file, bbox_inches='tight', dpi=300)
     print('Done.')
+
+
+def get_mags_from_AAVSO_V(url):
+    r = requests.get(url)
+    soup = BeautifulSoup(r.content, 'html.parser')
+    rows = soup.select('tbody tr')
+    dates = []
+    mags = []
+    for row in rows:
+        string = '' + row.text
+        string = string.split('\n')
+        try:
+            date = float(string[3])
+            mag = float(string[5])
+            band = string[7]
+            #print(date, mag, band)
+            if band == "V":
+                dates.append(date)
+                mags.append(mag)
+                #print(date, mag)
+            #print(mag)
+        except:
+            pass
+    return np.array(dates), np.array(mags)
+
+
+# CCDs
+url_base = 'https://www.aavso.org/apps/webobs/results/?star=betelgeuse&num_results=200&obs_types=dslr+ptg+pep+ccd+visdig&page='
+baseline_mag = 0.5
+pages = np.arange(1, 2, 1)
+all_dates1 = np.array([])
+all_mags1 = np.array([])
+for page in pages:
+    url = url_base + str(page)
+    #print(url)
+    dates, mags = get_mags_from_AAVSO_V(url)
+    print(dates, mags)
+    all_dates1 = np.concatenate((all_dates1, dates))
+    all_mags1 = np.concatenate((all_mags1, mags))
+    
+days_ago1 = np.max(all_dates1) - all_dates1
+print(all_dates1, all_mags1)
+
 
 
 # Pull the last 10 pages from AAVSO and collate the dates and mags
