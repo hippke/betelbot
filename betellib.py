@@ -3,6 +3,7 @@ import requests
 import numpy as np
 from twython import Twython
 from bs4 import BeautifulSoup
+from astropy.stats import biweight_location
 
 
 consumer_key = os.environ.get('consumer_key')
@@ -25,8 +26,8 @@ def build_string(days_ago, mag):
     data_last1_6_days = np.where((days_ago<6) & (days_ago>1))
     n_obs_last24hrs = np.size(mag[data_last24hrs])
     n_obs_last1_6_days = np.size(mag[data_last1_6_days])
-    mean_last24hrs = np.median(mag[data_last24hrs])
-    mean_last1_6_days = np.median(mag[data_last1_6_days])
+    mean_last24hrs = biweight_location(mag[data_last24hrs])
+    mean_last1_6_days = biweight_location(mag[data_last1_6_days])
     stdev = np.std(mag[data_last24hrs]) / np.sqrt(n_obs_last24hrs) \
         + np.std(mag[data_last1_6_days]) / np.sqrt(n_obs_last1_6_days)
     diff = mean_last24hrs - mean_last1_6_days
@@ -44,7 +45,7 @@ def build_string(days_ago, mag):
 
         mag_text = "My visual mag from last night was " + \
             str(format(mean_last24hrs, '.2f')) + \
-            ' (med of ' + \
+            ' (robust mean of ' + \
             str(n_obs_last24hrs) + \
             ' observations). '
 
@@ -52,7 +53,7 @@ def build_string(days_ago, mag):
             format(abs(diff), '.2f') + \
             ' mag ' + \
             changeword + \
-            ' than the med of the 5 previous nights (n=' + \
+            ' than the robust mean of the 5 previous nights (n=' + \
             str(n_obs_last1_6_days) + \
             ', ' + \
             format(abs(sigma), '.1f') + \
