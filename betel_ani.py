@@ -128,4 +128,4 @@ frames[0].save(
 for file in files:
     os.remove(file)
 
-#tweet(text, plot_file)
+tweet(text, plot_file)
