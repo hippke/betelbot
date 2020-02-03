@@ -5,6 +5,7 @@ from wotan import flatten
 from betellib import tweet, build_string, get_mags_from_AAVSO
 import requests
 from bs4 import BeautifulSoup
+from astropy.stats import biweight_location
 
 
 def make_plot(days_ago, dates, mag):
@@ -22,7 +23,7 @@ def make_plot(days_ago, dates, mag):
     plt.scatter(days_ago1, all_mags1, s=10, color='black', alpha=0.8, marker="x")
     plt.xlabel('Days before today')
     plt.ylabel('Visual magnitude')
-    mid = np.median(mag)
+    mid = biweight_location(mag)
     plt.ylim(mid-1, mid+1)
     plt.xlim(-1, 20)
     plt.plot(days_ago, trend_lc, color='red', linewidth=1)
@@ -30,7 +31,7 @@ def make_plot(days_ago, dates, mag):
     plt.gca().invert_xaxis()
     date_text = datetime.datetime.now().strftime("%d %b %Y")
     data_last24hrs = np.where(days_ago<1)
-    mean_last24hrs = np.median(mag[data_last24hrs])
+    mean_last24hrs = biweight_location(mag[data_last24hrs])
     lumi = str(format(mean_last24hrs, '.2f'))
     plt.text(19.5, mid+1-0.25, "AAVSO observations visual (by-eye) in blue", color='blue')
     plt.text(19.5, mid+1-0.15, "AAVSO observations from CCDs in black", color='black')
