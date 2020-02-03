@@ -1,6 +1,6 @@
 name: betel120dflux
 
-#on: [push]
+on: [push]
 
 #on:
 #  schedule:
