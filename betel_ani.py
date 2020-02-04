@@ -7,7 +7,7 @@ from PIL import Image, ImageDraw
 from matplotlib import pyplot as plt
 
 from transitleastsquares import cleaned_array
-from betellib import build_string, get_mags_from_AAVSO
+from betellib import build_string, get_mags_from_AAVSO, tweet
 
 from sklearn import gaussian_process
 from sklearn.gaussian_process import GaussianProcessRegressor
@@ -128,4 +128,4 @@ frames[0].save(
 for file in files:
     os.remove(file)
 
-tweet(text, plot_file)
+#tweet(text, plot_file)
