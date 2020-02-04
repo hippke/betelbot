@@ -86,6 +86,11 @@ def make_plot(days_ago, dates, mag):
         plt.clf()
 
 
+# Clear old crap
+files = glob.glob('*.png')
+for file in files:
+    os.remove(file)
+
 # Pull the last 10 pages from AAVSO and collate the dates and mags
 plot_file = 'plot120d.png'
 url_base = 'https://www.aavso.org/apps/webobs/results/?star=betelgeuse&num_results=200&obs_types=vis&page='
