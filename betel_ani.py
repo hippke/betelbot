@@ -133,4 +133,4 @@ frames[0].save(
 for file in files:
     os.remove(file)
 
-tweet("Updated #Betelgeuse forecast", plot_file)
+tweet("Updated #Betelgeuse forecast", 'betel_video.gif')
