@@ -5,6 +5,8 @@ import PIL
 import numpy as np
 from PIL import Image, ImageDraw
 from matplotlib import pyplot as plt
+from astropy.stats import biweight_location
+
 
 from transitleastsquares import cleaned_array
 from betellib import build_string, get_mags_from_AAVSO, tweet
@@ -28,7 +30,7 @@ def make_plot(days_ago, dates, mag):
     for night in nights:
         selector = np.where((days_ago<night+1) & (days_ago>night))
         n_obs = np.size(mag[selector])
-        flux = np.mean(mag[selector])
+        flux = biweight_location(mag[selector])
         error = np.std(mag[selector]) / np.sqrt(n_obs)
         if error > 0.75:
             error = 0
@@ -48,7 +50,7 @@ def make_plot(days_ago, dates, mag):
         plt.errorbar(-(nights+0.5), daily_mags, yerr=errors, fmt='.k', alpha=0.5)
         plt.xlabel('Days from today')
         plt.ylabel('Visual magnitude')
-        mid = np.median(mag)
+        mid = biweight_location(mag)
         plt.ylim(min_plot, max_plot)
         plt.xlim(x_days, 120)
         plt.gca().invert_yaxis()
