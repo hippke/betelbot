@@ -2,6 +2,7 @@ import numpy as np
 import datetime
 from matplotlib import pyplot as plt
 from betellib import tweet, build_string, get_mags_from_AAVSO
+from astropy.stats import biweight_location
 
 
 def make_plot(days_ago, dates, mag):
@@ -19,7 +20,7 @@ def make_plot(days_ago, dates, mag):
     for night in nights:
         selector = np.where((days_ago<night+bin_width) & (days_ago>night))
         n_obs = np.size(mag[selector])
-        flux = np.mean(mag[selector])
+        flux = biweight_location(mag[selector])
         error = np.std(mag[selector]) / np.sqrt(n_obs)
         if error > 0.2:
             error = 0
