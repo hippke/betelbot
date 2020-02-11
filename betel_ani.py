@@ -120,9 +120,10 @@ for file in files:
     frames.append(new_frame)
 
 # Make last frame last longer
-for i in range(5):
+for i in range(10):
+    print(file)
     frames.append(new_frame)
-    
+
 # Save gif
 frames[0].save(
     'betel_video.gif',
@@ -130,6 +131,7 @@ frames[0].save(
     append_images=frames,
     save_all=True,
     duration=500,
+    optimize=True,
     loop=0)  # forever
 
 for file in files:
