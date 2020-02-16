@@ -6,6 +6,6 @@ Tracks [AAVSO observations](https://www.aavso.org/lcg/plot?auid=000-BBK-383&star
 
 > My visual mag from last night was X.XX (avg of XX observations). That is X.XX mag dimmer than the avg of the X previous nights (n=XXX, 0.Xσ).
 
-<img src="https://raw.githubusercontent.com/hippke/betelbot/master/plot20d.png" data-canonical-src="https://raw.githubusercontent.com/hippke/betelbot/master/plot.png20d" width="400"/>
+<img src="https://raw.githubusercontent.com/hippke/betelbot/master/betel_video.gif" data-canonical-src="https://raw.githubusercontent.com/hippke/betelbot/master/betel_video.gif" width="400"/>
 
 This bot runs as a [Github Action](https://github.com/hippke/betelbot/actions). You are free to adapt the idea and code provided here to make your own projects. Feedback is welcome.
