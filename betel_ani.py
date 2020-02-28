@@ -58,7 +58,7 @@ def make_plot(days_ago, dates, mag):
         plt.text(-x_days-2, min_plot+0.1, 'AAVSO visual (by-eye) daily bins', ha='right')
         plt.text(-x_days-2, min_plot+0.2, 'Gaussian process regression, Matern 3/2 kernel', ha='right')
         plt.text(-x_days-2, min_plot+0.3, '@betelbot update ' + date_text, ha='right')
-        use_days = 30-missing_days
+        use_days = 60-missing_days
         X = np.array(nights+0.5)
         X = X[:use_days]
         y = np.array(daily_mags)
@@ -73,7 +73,7 @@ def make_plot(days_ago, dates, mag):
         kernel=1**2 + Matern(length_scale=length_scale, nu=1.5) + WhiteKernel(noise_level=1),
         n_restarts_optimizer=0, normalize_y=False,
         optimizer='fmin_l_bfgs_b', random_state=None)
-        x_pred = np.linspace(30, -120, 250).reshape(-1,1)
+        x_pred = np.linspace(60, -120, 250).reshape(-1,1)
         y_pred, sigma = gp.predict(x_pred, return_std=True)
         plt.plot(-x_pred, y_pred, linestyle='dashed', color='blue')
         plt.fill_between(-x_pred.ravel(), y_pred+sigma, y_pred-sigma, alpha=0.5)
