@@ -52,7 +52,7 @@ def make_plot(days_ago, dates, mag):
         plt.ylabel('Visual magnitude')
         mid = biweight_location(mag)
         plt.ylim(min_plot, max_plot)
-        plt.xlim(x_days, 120)
+        plt.xlim(-100, 100)
         plt.gca().invert_yaxis()
         date_text = datetime.datetime.now().strftime("%d %b %Y")
         plt.text(-x_days-2, min_plot+0.1, 'AAVSO visual (by-eye) daily bins', ha='right')
