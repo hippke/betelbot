@@ -87,7 +87,7 @@ print(all_dates1, all_mags1)
 # Pull the last 10 pages from AAVSO and collate the dates and mags
 plot_file = 'plot20d.png'
 url_base = 'https://www.aavso.org/apps/webobs/results/?star=betelgeuse&num_results=200&obs_types=vis&page='
-pages = np.arange(1, 4, 1)
+pages = np.arange(1, 10, 1)
 all_dates = np.array([])
 all_mags = np.array([])
 for page in pages:
