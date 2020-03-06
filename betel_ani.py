@@ -55,9 +55,9 @@ def make_plot(days_ago, dates, mag):
         plt.xlim(-100, 100)
         plt.gca().invert_yaxis()
         date_text = datetime.datetime.now().strftime("%d %b %Y")
-        plt.text(-x_days-2, min_plot+0.1, 'AAVSO visual (by-eye) daily bins', ha='right')
-        plt.text(-x_days-2, min_plot+0.2, 'Gaussian process regression, Matern 3/2 kernel', ha='right')
-        plt.text(-x_days-2, min_plot+0.3, '@betelbot update ' + date_text, ha='right')
+        plt.text(95, min_plot+0.1, 'AAVSO visual (by-eye) daily bins', ha='right')
+        plt.text(95, min_plot+0.2, 'Gaussian process regression, Matern 3/2 kernel', ha='right')
+        plt.text(95, min_plot+0.3, '@betelbot update ' + date_text, ha='right')
         use_days = 60-missing_days
         X = np.array(nights+0.5)
         X = X[:use_days]
@@ -96,7 +96,7 @@ for file in files:
 # Pull the last 10 pages from AAVSO and collate the dates and mags
 plot_file = 'plot120d.png'
 url_base = 'https://www.aavso.org/apps/webobs/results/?star=betelgeuse&num_results=200&obs_types=vis&page='
-pages = np.arange(1, 10, 1)
+pages = np.arange(1, 25, 1)
 all_dates = np.array([])
 all_mags = np.array([])
 for page in pages:
