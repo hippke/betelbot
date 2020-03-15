@@ -48,16 +48,16 @@ def make_plot(days_ago, dates, mag):
         daily_mags = daily_mags_all.copy()[missing_days:]
         errors = errors_all.copy()[missing_days:]
         plt.errorbar(-(nights+0.5), daily_mags, yerr=errors, fmt='.k', alpha=0.5)
-        plt.xlabel('Days from today')
-        plt.ylabel('Visual magnitude')
+        plt.xlabel('从今天算起的天数')
+        plt.ylabel('视星等')
         mid = biweight_location(mag)
         plt.ylim(min_plot, max_plot)
         plt.xlim(-100, 100)
         plt.gca().invert_yaxis()
         date_text = datetime.datetime.now().strftime("%d %b %Y")
-        plt.text(95, min_plot+0.1, 'AAVSO visual (by-eye) daily bins', ha='right')
-        plt.text(95, min_plot+0.2, 'Gaussian process regression, Matern 3/2 kernel', ha='right')
-        plt.text(95, min_plot+0.3, '@betelbot update ' + date_text, ha='right')
+        plt.text(95, min_plot+0.1, 'AAVSO每日观测数据合成', ha='right')
+        plt.text(95, min_plot+0.2, '高斯过程回归, Matern 3/2 核', ha='right')
+        plt.text(95, min_plot+0.3, '天文通 用 @betelbot 更新于 ' + date_text, ha='right')
         use_days = 60-missing_days
         X = np.array(nights+0.5)
         X = X[:use_days]
