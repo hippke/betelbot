@@ -4,7 +4,7 @@ name: betel20d
 
 on:
   schedule:
-    - cron: '11 16 * * *'
+    - cron: '16 16 * * *'
 
 jobs:
   build:
