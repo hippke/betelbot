@@ -2,7 +2,7 @@ import numpy as np
 import datetime
 from matplotlib import pyplot as plt
 from wotan import flatten
-from betellib import tweet, build_string, get_mags_from_AAVSO
+from betellib import build_string, get_mags_from_AAVSO
 import requests
 from bs4 import BeautifulSoup
 from astropy.stats import biweight_location
