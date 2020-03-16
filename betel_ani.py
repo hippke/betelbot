@@ -9,7 +9,7 @@ from astropy.stats import biweight_location
 
 
 from transitleastsquares import cleaned_array
-from betellib import build_string, get_mags_from_AAVSO, tweet
+from betellib import build_string, get_mags_from_AAVSO
 
 from sklearn import gaussian_process
 from sklearn.gaussian_process import GaussianProcessRegressor
