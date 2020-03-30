@@ -23,7 +23,8 @@ def make_plot(days_ago, dates, mag):
     plt.scatter(days_ago1, all_mags1, s=10, color='black', alpha=0.8, marker="x")
     plt.xlabel('Days before today')
     plt.ylabel('Visual magnitude')
-    mid = biweight_location(mag)
+    #mid = biweight_location(mag)
+    mid = 1.10
     plt.ylim(mid-1, mid+1)
     plt.xlim(-1, 20)
     plt.plot(days_ago, trend_lc, color='red', linewidth=1)
