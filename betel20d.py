@@ -36,7 +36,7 @@ def make_plot(days_ago, dates, mag):
     plt.text(19.5, mid+1-0.25, "AAVSO eyes·", color='blue')
     plt.text(19.5, mid+1-0.15, "AAVSO ccd", color='black')
     plt.text(19.5, mid+1-0.05, "red", color='red')
-    plt.text(19.5, mid-1+0.1, '#mag ' + lumi + " = " + date_text + " by @betelbot 生成")
+    plt.text(19.5, mid-1+0.1, '#mag ' + lumi + " = " + date_text + " by @betelbot")
     plt.savefig(plot_file, bbox_inches='tight', dpi=300)
     print('Done.')
 
