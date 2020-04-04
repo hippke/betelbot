@@ -4,7 +4,7 @@ name: betel20d
 
 on:
   schedule:
-    - cron: '36 8 * * *'
+    - cron: '59 8 * * *'
 
 jobs:
   build:
@@ -24,6 +24,7 @@ jobs:
         access_token: ${{ secrets.access_token }}
         access_token_secret: ${{ secrets.access_token_secret }}
       run: |
+        $ fc-list :lang=zh
         python betel20d.py
     - name: Commit files
       run: |
