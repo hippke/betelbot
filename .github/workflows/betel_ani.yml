@@ -4,7 +4,7 @@ name: betelani
 
 on:
   schedule:
-    - cron: '35 8 * * *'
+    - cron: '34 8 * * *'
 
 jobs:
   build:
