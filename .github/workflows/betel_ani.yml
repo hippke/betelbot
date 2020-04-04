@@ -4,7 +4,7 @@ name: betelani
 
 on:
   schedule:
-    - cron: '39 16 * * *'
+    - cron: '35 8 * * *'
 
 jobs:
   build:
@@ -37,4 +37,4 @@ jobs:
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
-        github_token: ${{ secrets.SECRET_GITHUB_TOKEN }}
+        github_token: ${{ secrets.access_token }}
