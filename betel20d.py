@@ -18,8 +18,8 @@ def make_plot(days_ago, dates, mag):
         window_length=time_span/3,
         return_trend=True,
         )
-    plt.rcParams['font.sans-serif']=['SimHei']    #指定默认字体 SimHei为黑体
-    plt.rcParams['axes.unicode_minus']=False   #用来正常显示负号
+    #plt.rcParams['font.sans-serif']=['SimHei']    #指定默认字体 SimHei为黑体
+    #plt.rcParams['axes.unicode_minus']=False   #用来正常显示负号
     plt.scatter(days_ago, mag, s=5, color='blue', alpha=0.5)
 
     plt.scatter(days_ago1, all_mags1, s=10, color='black', alpha=0.8, marker="x")
