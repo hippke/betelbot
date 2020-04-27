@@ -15,7 +15,7 @@ def make_plot(days_ago, dates, mag):
         days_ago,
         mag,
         method='lowess',
-        window_length=time_span/3,
+        window_length=time_span/5,
         return_trend=True,
         )
     plt.scatter(days_ago, mag, s=5, color='blue', alpha=0.5)
