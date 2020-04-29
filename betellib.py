@@ -33,7 +33,7 @@ def build_string(days_ago, mag):
     diff = mean_last24hrs - mean_last1_6_days
     sigma = diff / stdev
 
-    if n_obs_last24hrs < 3 or n_obs_last1_6_days < 3:
+    if n_obs_last24hrs < 1 or n_obs_last1_6_days < 2:
         print('Not enough observations. Abort.')
         return None
     else:
