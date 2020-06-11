@@ -7,7 +7,6 @@ from PIL import Image, ImageDraw
 from matplotlib import pyplot as plt
 from astropy.stats import biweight_location
 
-
 from transitleastsquares import cleaned_array
 from betellib import build_string, get_mags_from_AAVSO, tweet
 
@@ -19,8 +18,8 @@ from sklearn.gaussian_process.kernels import Matern, WhiteKernel, ConstantKernel
 def make_plot(days_ago, dates, mag):
     print('Making plot...')
     time_span = np.max(dates) - np.min(dates)
-    min_plot = -1
-    max_plot = 2
+    min_plot = -0.5
+    max_plot = 1.5
     x_days = -120
     
     # Make daily bins
@@ -58,13 +57,13 @@ def make_plot(days_ago, dates, mag):
         plt.text(95, min_plot+0.1, 'AAVSO visual (by-eye) daily bins', ha='right')
         plt.text(95, min_plot+0.2, 'Gaussian process regression, Matern 3/2 kernel', ha='right')
         plt.text(95, min_plot+0.3, '@betelbot update ' + date_text, ha='right')
-        use_days = 60-missing_days
+        use_days = 100-missing_days
         X = np.array(nights+0.5)
         X = X[:use_days]
         y = np.array(daily_mags)
         y = y[:use_days]
         X, y = cleaned_array(X, y)
-        length_scale = 1
+        length_scale = 2
         kernel = ConstantKernel() + Matern(length_scale=length_scale, nu=3/2) + WhiteKernel(noise_level=1)
         X = X.reshape(-1, 1)
         gp = gaussian_process.GaussianProcessRegressor(kernel=kernel)
