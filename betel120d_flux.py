@@ -8,9 +8,9 @@ from astropy.stats import biweight_location
 def make_plot(days_ago, dates, mag):
     print('Making plot...')
     time_span = np.max(dates) - np.min(dates)
-    min_plot = -1
-    max_plot = +1
-    x_days = 120
+    min_plot = 0
+    max_plot = +1.5
+    x_days = 300
     
     # Make bins
     bin_width = 1
@@ -41,8 +41,12 @@ def make_plot(days_ago, dates, mag):
     plt.ylim(min_plot, max_plot)
     plt.xlim(x_days, 0)
     date_text = datetime.datetime.now().strftime("%d %b %Y")
-    lumi = str(int((round(flux[0]*100, 0))))
-    text = "#Betelgeuse at " + lumi + r"% of its usual brightness @betelbot "
+    try:
+        lumi = str(int((round(flux[0]*100, 0))))
+        text = "#Betelgeuse at " + lumi + r"% of its usual brightness @betelbot "
+    except:
+        text = "No new #Betelgeuse at brightness tonight @betelbot"
+        lumi = 0
     plt.text(x_days-2, 0.19, "Update: " + date_text)
     plt.text(x_days-2, 0.12, text)
     plt.text(x_days-2, 0.05, "AAVSO visual (by-eye) daily bins")
@@ -69,6 +73,9 @@ mags = all_mags
 days_ago = np.max(dates) - dates
 
 lumi = make_plot(days_ago, dates, mags)
-text = "Now at " + lumi + r"% of my usual brightness! #Betelgeuse"
+if lumi == 0:
+    text = "No new #Betelgeuse at brightness tonight"
+else:
+    text = "Now at " + lumi + r"% of my usual brightness! #Betelgeuse"
 print(text)
 tweet(text, plot_file)
