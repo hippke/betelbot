@@ -19,7 +19,7 @@ from sklearn.gaussian_process.kernels import Matern, WhiteKernel, ConstantKernel
 def make_plot(days_ago, dates, mag):
     print('Making plot...')
     time_span = np.max(dates) - np.min(dates)
-    min_plot = 0.0
+    min_plot = -1
     max_plot = 2
     x_days = -120
     
