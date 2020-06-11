@@ -8,8 +8,8 @@ from astropy.stats import biweight_location
 def make_plot(days_ago, dates, mag):
     print('Making plot...')
     time_span = np.max(dates) - np.min(dates)
-    min_plot = 0
-    max_plot = 1.4
+    min_plot = -1
+    max_plot = +1
     x_days = 120
     
     # Make bins
