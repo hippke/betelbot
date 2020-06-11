@@ -33,9 +33,8 @@ def build_string(days_ago, mag):
     diff = mean_last24hrs - mean_last1_6_days
     sigma = diff / stdev
 
-    if n_obs_last24hrs < 1 or n_obs_last1_6_days < 2:
-        print('Not enough observations. Abort.')
-        return None
+    if n_obs_last24hrs < 1 or n_obs_last1_6_days < 1:
+        return "No new observations last night"
     else:
 
         if diff > 0:
@@ -77,6 +76,7 @@ def get_mags_from_AAVSO(url):
         try:
             date = float(string[3])
             mag = float(string[5])
+            print(date, mag)
             # Remove crap
             if mag < 3:
                 dates.append(date)
