@@ -19,15 +19,24 @@ def make_plot(days_ago, dates, mag):
         return_trend=True,
         )
     plt.scatter(days_ago, mag, s=5, color='blue', alpha=0.5)
+    plt.plot(days_ago, trend_lc, color='red', linewidth=1)
 
+    flatten_lc1, trend_lc1 = flatten(
+        days_ago1,
+        all_mags1,
+        method='lowess',
+        window_length=time_span/5,
+        return_trend=True,
+        )
     plt.scatter(days_ago1, all_mags1, s=10, color='black', alpha=0.8, marker="x")
+    plt.plot(days_ago1, trend_lc1, color='red', linewidth=1)
     plt.xlabel('Days before today')
     plt.ylabel('Visual magnitude')
     #mid = biweight_location(mag)
-    mid = 0.30
+    mid = 0.25
     plt.ylim(mid-1, mid+1)
     plt.xlim(-1, 20)
-    plt.plot(days_ago, trend_lc, color='red', linewidth=1)
+    
     plt.gca().invert_yaxis()
     plt.gca().invert_xaxis()
     date_text = datetime.datetime.now().strftime("%d %b %Y")
