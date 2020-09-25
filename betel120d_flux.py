@@ -33,7 +33,9 @@ def make_plot(days_ago, dates, mag):
     # Convert magnitudes to fluxes
     bin_mags = np.array(bin_mags)
     flux = 1 / (10**(0.4 * (bin_mags - baseline_mag)))
-    print(flux)
+    latest_flux = flux[0]
+    if np.isnan(latest_flux):
+        latest_flux = flux[1]
 
     plt.errorbar(nights+0.5, flux, yerr=errors, fmt='.k')
     plt.xlabel('Days before today')
@@ -42,7 +44,7 @@ def make_plot(days_ago, dates, mag):
     plt.xlim(x_days, 0)
     date_text = datetime.datetime.now().strftime("%d %b %Y")
     try:
-        lumi = str(int((round(flux[0]*100, 0))))
+        lumi = str(int((round(latest_flux*100, 0))))
         text = "#Betelgeuse at " + lumi + r"% of its usual brightness @betelbot "
     except:
         text = "No new #Betelgeuse at brightness tonight @betelbot"
@@ -59,7 +61,7 @@ def make_plot(days_ago, dates, mag):
 plot_file = 'plot120d_flux.png'
 url_base = 'https://www.aavso.org/apps/webobs/results/?star=betelgeuse&num_results=200&obs_types=vis&page='
 baseline_mag = 0.5
-pages = np.arange(1, 20, 1)
+pages = np.arange(1, 10, 1)
 all_dates = np.array([])
 all_mags = np.array([])
 for page in pages:
