@@ -61,7 +61,7 @@ def make_plot(days_ago, dates, mag):
 plot_file = 'plot120d_flux.png'
 url_base = 'https://www.aavso.org/apps/webobs/results/?star=betelgeuse&num_results=200&obs_types=vis&page='
 baseline_mag = 0.5
-pages = np.arange(1, 10, 1)
+pages = np.arange(1, 20, 1)
 all_dates = np.array([])
 all_mags = np.array([])
 for page in pages:
