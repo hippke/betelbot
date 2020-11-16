@@ -47,7 +47,7 @@ def make_plot(days_ago, dates, mag):
         lumi = str(int((round(latest_flux*100, 0))))
         text = "#Betelgeuse at " + lumi + r"% of its usual brightness @betelbot "
     except:
-        text = "No new #Betelgeuse at brightness tonight @betelbot"
+        text = "No new #Betelgeuse brightness tonight @betelbot"
         lumi = 0
     plt.text(x_days-2, 0.19, "Update: " + date_text)
     plt.text(x_days-2, 0.12, text)
