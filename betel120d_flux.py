@@ -76,7 +76,7 @@ days_ago = np.max(dates) - dates
 
 lumi = make_plot(days_ago, dates, mags)
 if lumi == 0:
-    text = "No new #Betelgeuse at brightness tonight"
+    text = "No new #Betelgeuse brightness tonight"
 else:
     text = "Now at " + lumi + r"% of my usual brightness! #Betelgeuse"
 print(text)
