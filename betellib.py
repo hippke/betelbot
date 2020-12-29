@@ -78,7 +78,7 @@ def get_mags_from_AAVSO(url):
             mag = float(string[5])
             print(date, mag)
             # Remove crap
-            if mag < 3:
+            if mag < 3 and date > 1000000:
                 dates.append(date)
                 mags.append(mag)
         except:
