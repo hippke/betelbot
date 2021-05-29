@@ -79,5 +79,6 @@ if lumi == 0:
     text = "No new #Betelgeuse brightness tonight"
 else:
     text = "Now at " + lumi + r"% of my usual brightness! #Betelgeuse"
+    tweet(text, plot_file)
 print(text)
-tweet(text, plot_file)
+
