@@ -9,7 +9,7 @@ def make_plot(days_ago, dates, mag):
     print('Making plot...')
     time_span = np.max(dates) - np.min(dates)
     min_plot = 0
-    max_plot = +1.5
+    max_plot = +1.7
     x_days = 300
     
     # Make bins
